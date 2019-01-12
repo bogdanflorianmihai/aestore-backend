@@ -3,9 +3,9 @@ var Sequelize = require("sequelize")
 var nodeadmin = require("nodeadmin")
 
 //connect to mysql database
-var sequelize = new Sequelize('catalog', 'root', '', {
-    dialect:'mysql',
-    host:'localhost'
+var sequelize = new Sequelize('catalog', 'aecatalogadmin', 'Xf2Td6VZLRmeRGFq', {
+    dialect:'postgres',
+    host:'bmapps.ro'
 })
 
 sequelize.authenticate().then(function(){
@@ -59,17 +59,12 @@ app.get('/createdata', (req, res) => {
     //TODO add some test data here
 })
 
-async function getCategories(request, response) {
-    try {
-        let categories = await Categories.findAll();
-        response.status(200).json(categories)
-    } catch(err) {
-        response.status(500).send('something bad happened')
-    }
-}
-
 // get a list of categories
-app.get('/categories', getCategories)
+app.get('/categories', function(request, response) {
+    Categories.findAll().then(function(categories){
+        response.status(200).send(categories)
+    })
+})
 
 // get one category by id
 app.get('/categories/:id', function(request, response) {
