@@ -1,6 +1,5 @@
 var express = require("express")
 var Sequelize = require("sequelize")
-var nodeadmin = require("nodeadmin")
 
 //connect to mysql database
 var sequelize = new Sequelize('catalog', 'aecatalogadmin', 'Xf2Td6VZLRmeRGFq', {
@@ -37,8 +36,6 @@ Products.belongsTo(Categories, {foreignKey: 'category_id', targetKey: 'id'})
 Products.hasMany(Reviews, {foreignKey: 'product_id'});
 
 var app = express()
-
-app.use('/nodeamin', nodeadmin(app))
 
 //access static files
 app.use(express.static('public'))
