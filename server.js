@@ -115,10 +115,8 @@ app.get('/products', function(request, response) {
         {
             include: [{
                 model: Categories,
-                where: { id: Sequelize.col('products.category_id') }
             }, {
                 model: Reviews,
-                where: { id: Sequelize.col('products.id')},
                 required: false
             }]
         }
@@ -134,10 +132,8 @@ app.get('/products/:id', function(request, response) {
     Products.findById(request.params.id, {
             include: [{
                 model: Categories,
-                where: { id: Sequelize.col('products.category_id') }
             }, {
                 model: Reviews,
-                where: { id: Sequelize.col('products.id')},
                 required: false
             }]
         }).then(
@@ -185,10 +181,8 @@ app.get('/categories/:id/products', function(request, response) {
             
             include: [{
                 model: Categories,
-                where: { id: Sequelize.col('products.category_id') }
             }, {
                 model: Reviews,
-                where: { id: Sequelize.col('products.id')},
                 required: false
             }]
         }
